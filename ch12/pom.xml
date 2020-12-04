@@ -1,0 +1,11 @@
+<project>
+    <modelVersion>1.0.0</modelVersion>
+    <artifactId>ch12</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <parent>
+        <groupId>ru.kdv</groupId>
+        <artifactId>multi</artifactId>
+        <version>1.0</version>
+    </parent>
+</project>
