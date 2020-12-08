@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>ru.kdv</groupId>
 	<artifactId>multi</artifactId>
+	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>multi</name>
 
@@ -61,17 +62,8 @@
 
 	<repositories>
 		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-		</repository>
-		<repository>
-			<id>spring-snapshots</id>
-			<name>Spring Snapshots</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+			<id>maven-group</id>
+			<url>https://nexus.sigma.sbrf.ru/nexus/service/local/artifact/maven/</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
