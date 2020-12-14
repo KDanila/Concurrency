@@ -18,8 +18,26 @@ public class PutTakeTest {
     private final BoundedBuffer<Integer> bb;
     private final int nTrials, nPairs;
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         new PutTakeTest(10, 10, 100000).test(); // образец параметров
+        pool.shutdown();
+    }*/
+
+    public static void main(String[] args) throws Exception {
+        int tpt = 100000; // испытания на поток
+        for (int cap = 1; cap <= 1000; cap *= 10) {
+            System.out.println("Capacity: " + cap);
+            for (int pairs = 1; pairs <= 128; pairs *= 2) {
+                PutTakeTest t = new PutTakeTest(cap, pairs, tpt);
+                System.out.print("Pairs: " + pairs + "\t");
+                t.test();
+                System.out.print("\t");
+                Thread.sleep(1000);
+                t.test();
+                System.out.println();
+                Thread.sleep(1000);
+            }
+        }
         pool.shutdown();
     }
 
@@ -41,7 +59,7 @@ public class PutTakeTest {
             barrier.await(); // ждать, когда все потоки будут готовы
             barrier.await(); // ждать, когда все потоки завершатся
             long nsPerItem = barrierTimer.getTime() / (nPairs * (long) nTrials);
-            //System.out.print("Throughput: " + nsPerItem + " ns/item");
+            System.out.print("Throughput: " + nsPerItem + " ns/item");
             assertEquals(putSum.get(), takeSum.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -94,8 +112,6 @@ public class PutTakeTest {
                 startTime = t;
             } else {
                 endTime = t;
-                long nsPerItem = barrierTimer.getTime() / (nPairs * (long) nTrials);
-                System.out.println("Throughput: " + nsPerItem + " ns/item");
             }
         }
 
