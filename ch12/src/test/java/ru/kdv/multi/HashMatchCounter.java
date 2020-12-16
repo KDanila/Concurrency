@@ -14,6 +14,7 @@ public class HashMatchCounter {
         for (int i = 0; i < 100; i++) {
             pool.submit(new MatchCounter(i));
         }
+        pool.shutdown();
     }
 
     private static class MatchCounter implements Runnable{
